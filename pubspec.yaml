@@ -15,8 +15,9 @@ dependencies:
   hive: ^0.4.0
   sqflite: ^1.1.6
   shared_preferences: ^0.5.3+4
-  fl_chart: ^0.1.6
-  moor_ffi: ^0.0.1
+  fl_chart: ^0.10.0
+  moor_ffi: ^0.6.0
+  sembast: ^2.4.5
 
 flutter:
   uses-material-design: true

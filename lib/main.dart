@@ -203,13 +203,13 @@ class BenchmarkResult extends StatelessWidget {
             y: max(result.intTime.toDouble(), 1),
             color: leftBarColor,
             width: width,
-            isRound: true,
+            borderRadius: BorderRadius.circular(8),
           ),
           BarChartRodData(
             y: max(result.stringTime.toDouble(), 1),
             color: rightBarColor,
             width: width,
-            isRound: true,
+            borderRadius: BorderRadius.circular(8),
           ),
         ],
       );
@@ -273,57 +273,58 @@ class BenchmarkResult extends StatelessWidget {
   _buildChart() {
     var maxTime = maxResultTime;
     return Container(
-      child: FlChart(
-        chart: BarChart(
-          BarChartData(
-            barTouchData: BarTouchData(
-              touchTooltipData: TouchTooltipData(
+      child: BarChart(
+        BarChartData(
+          barTouchData: BarTouchData(
+            touchTooltipData: BarTouchTooltipData(
                 tooltipBgColor: Colors.grey,
-                getTooltipItems: (spots) {
-                  return spots.map((TouchedSpot spot) {
-                    return null;
-                  }).toList();
-                },
-              ),
-            ),
-            maxY: maxTime.toDouble(),
-            alignment: BarChartAlignment.spaceAround,
-            titlesData: FlTitlesData(
-              show: true,
-              bottomTitles: SideTitles(
-                showTitles: true,
-                textStyle: TextStyle(
-                  color: const Color(0xff7589a2),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
+                getTooltipItem: (group, i, rod, j) {
+                  return null;
+                }
+                // getTooltipItem: (spots) {
+                //   return spots.map((TouchedSpot spot) {
+                //     return null;
+                //   }).toList();
+                // },
                 ),
-                margin: 20,
-                getTitles: (double value) {
-                  return labels[value.toInt()];
-                },
-              ),
-              leftTitles: SideTitles(
-                showTitles: true,
-                textStyle: TextStyle(
-                  color: const Color(0xff7589a2),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                ),
-                margin: 32,
-                reservedSize: 50,
-                getTitles: (value) {
-                  if (value % (maxResultTime ~/ 4) == 0) {
-                    return value.toInt().toString() + 'ms';
-                  }
-                  return '';
-                },
-              ),
-            ),
-            borderData: FlBorderData(
-              show: false,
-            ),
-            barGroups: barGroups,
           ),
+          maxY: maxTime.toDouble(),
+          alignment: BarChartAlignment.spaceAround,
+          titlesData: FlTitlesData(
+            show: true,
+            bottomTitles: SideTitles(
+              showTitles: true,
+              textStyle: TextStyle(
+                color: const Color(0xff7589a2),
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
+              margin: 20,
+              getTitles: (double value) {
+                return labels[value.toInt()];
+              },
+            ),
+            leftTitles: SideTitles(
+              showTitles: true,
+              textStyle: TextStyle(
+                color: const Color(0xff7589a2),
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
+              margin: 32,
+              reservedSize: 50,
+              getTitles: (value) {
+                if (value % (maxResultTime ~/ 4) == 0) {
+                  return value.toInt().toString() + 'ms';
+                }
+                return '';
+              },
+            ),
+          ),
+          borderData: FlBorderData(
+            show: false,
+          ),
+          barGroups: barGroups,
         ),
       ),
     );

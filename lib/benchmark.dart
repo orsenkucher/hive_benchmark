@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:hive_benchmark/runners/hive.dart';
 import 'package:hive_benchmark/runners/moor_ffi.dart';
 import 'package:hive_benchmark/runners/runner.dart';
+import 'package:hive_benchmark/runners/sembast.dart';
 import 'package:hive_benchmark/runners/shared_preferences.dart';
 import 'package:hive_benchmark/runners/sqflite.dart';
 import 'package:random_string/random_string.dart' as randStr;
@@ -20,9 +21,10 @@ class Result {
 
 final runners = [
   HiveRunner(false),
-  HiveRunner(true),
-  SqfliteRunner(),
-  SharedPreferencesRunner(),
+  // HiveRunner(true),
+  // SqfliteRunner(),
+  // SharedPreferencesRunner(),
+  SembastRunner(),
   MoorFfiRunner(),
 ];
 
