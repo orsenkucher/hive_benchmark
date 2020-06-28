@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:hive_benchmark/runners/hive.dart';
 import 'package:hive_benchmark/runners/moor_ffi.dart';
 import 'package:hive_benchmark/runners/runner.dart';
+import 'package:hive_benchmark/runners/sembast.dart';
 import 'package:hive_benchmark/runners/shared_preferences.dart';
 import 'package:hive_benchmark/runners/sqflite.dart';
 import 'package:random_string/random_string.dart' as randStr;
@@ -23,6 +24,7 @@ final runners = [
   HiveRunner(true),
   SqfliteRunner(),
   SharedPreferencesRunner(),
+  SembastRunner(),
   MoorFfiRunner(),
 ];
 
@@ -35,7 +37,7 @@ Map<String, int> generateIntEntries(int count) {
   var random = Random();
   for (var i = 0; i < count; i++) {
     var key = randStr.randomAlphaNumeric(randStr.randomBetween(5, 200));
-    var val = random.nextInt(2 ^ 50);
+    var val = random.nextInt(1 << 32);
     map[key] = val;
   }
   return map;
